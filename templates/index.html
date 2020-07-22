@@ -8,25 +8,42 @@
 <div class="content">
     <h1 style="text-align: center">KeyWord Generator: proof of concept</h1>
     <p>
+        Input a CSV published to the web (from Google Sheets). Upon successful import, the download will begin shortly. Otherwise, you will recieve an error message.
+    </p>
+    <!--
+    <p>
         Input a CSV file either from your local computer, or from a CSV published to the web.
     </p>
+    -->
     
 
     <!-- Form to input link to CSV published to the web -->
     <div class="form">
         <form action="/" method="POST">
             <input type="text" name="content" id="content">
-            <input type="submit" value="Link to CSV">
+            <input type="submit" value="Upload & Process CSV">
         </form>
     </div>
 
-    <!-- Form to upload CSV file from local system -->
+    <br>
+
+    <!-- Input Campaign name 
+    <div class="form">
+        <form action="/campaign_name/" method="POST">
+            <input type="text" name="campaign_name" id="campaign_name">
+            <input type="submit" value="Enter Campaign Name">
+        </form>
+    </div>
+    -->
+
+    <!-- Form to upload CSV file from local system (need to resolve encoding issue)
      <div class="form">
         <form action="/" method="POST">
             <input type="file" accept= ".csv" name="content" id="content">
             <input type="submit" value="Upload CSV">
         </form>
     </div>
+    -->
 
     <br>
 

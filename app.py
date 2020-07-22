@@ -84,6 +84,13 @@ def index():
             #output_mbm = pd.concat([final, mbm_kw], axis=1)
 
             keyword_output = pd.concat([em_kw, mbm_kw])
+
+            # Check for existence of campaign_name, and append to output file
+            if 'campaign_name' in globals():
+                campaign_name_col = [campaign_name] * len(keyword_output)
+                keyword_output["Campaign Name"] = campaign_name_col
+            else:
+                pass
             #keyword_output = pd.concat([output_em, output_mbm])
 
             #final["concatenated kw"] = concat_kw
@@ -111,15 +118,17 @@ def index():
         #return redirect('/')
         #dataset = pd.read_csv(input_file, sep=",")
         
-        return render_template('index.html')
+        #return redirect('/')
+        return render_template("index.html")
 
 
-@app.route('/download/', methods=["GET"])
+@app.route('/campaign_name/', methods=["GET", "POST"])
 def download():
-    if request.method == "GET":
-        return send_file("output.csv", as_attachment=True)
+    if request.method == "POST":
+        campaign_name = str(request.form['campaign_name'])
+        return render_template("index.html")
     else:
-        return "Yeet"
+        pass
 
 
 
