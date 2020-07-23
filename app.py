@@ -3,11 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
 from itertools import product
 
-
-
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL') or 'sqlite:///test.db'
-#db = SQLAlchemy(app)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -18,7 +14,13 @@ def index():
             input_file = str(request.form['content'])
             df = pd.read_csv(input_file, sep=",", dtype='str', encoding='utf-8')
 
-            # count number of columns in the dataframe
+            # Extract the campaign name
+            campaign_name = str(df.loc[0, "Campaign Name"])
+
+            # remove the campaign name column from the dataframe
+            df.drop(columns=["Campaign Name"])
+            
+            # count number of remaining columns in the dataframe
             col_num = len(df.columns)
 
             # Create a dictionary to store lists of each column of the dataframe. Each key is the column name
@@ -29,6 +31,8 @@ def index():
             # convert columns to lists
             for element in col_names:
                 cd[element] = df[element].dropna().tolist()
+
+            # need to add support for a single input column
 
             if col_num == 2:
                 final = list(product(cd[col_names[0]], cd[col_names[1]]))
@@ -52,11 +56,9 @@ def index():
                 # put an error statement here
                 pass
 
-            
-        
             final = pd.DataFrame(final)
 
-            # To Do: Concatenate keywords
+            # Concatenate keywords
             em_kw = [] # list for exact match keywords
             mbm_kw = [] # list for modified broad match keywords
             for i in range(len(final)):
@@ -79,62 +81,25 @@ def index():
             em_kw["Match Type"] = match_em
             mbm_kw["Match Type"] = match_mbm
 
-            # Concatenate output dataset
-            #output_em = pd.concat([final, em_kw], axis=1)
-            #output_mbm = pd.concat([final, mbm_kw], axis=1)
-
             keyword_output = pd.concat([em_kw, mbm_kw])
 
-            # Check for existence of campaign_name, and append to output file
-            if 'campaign_name' in globals():
-                campaign_name_col = [campaign_name] * len(keyword_output)
-                keyword_output["Campaign Name"] = campaign_name_col
-            else:
-                pass
-            #keyword_output = pd.concat([output_em, output_mbm])
+            # Insert campaign name into the output file
+            campaign_name_col = [campaign_name] * len(keyword_output)
+            keyword_output.insert(0, "Campaign Name", campaign_name_col)
 
-            #final["concatenated kw"] = concat_kw
-
-
-            #final.to_csv("output.csv", sep=",", index=False)
+            # Convert the output DataFrame to a CSV
             keyword_output.to_csv("output.csv", sep=",", index=False)
             
-            # Display the first line of the csv on screen
-            #return dataset.head(1).to_html()
-            
-            #return redirect('/')
-            
+            # Return the output file to trigger the download
             return send_file("output.csv", as_attachment=True)
-            #return render_template("download.html")
         
         except:
+            # Error message if CSV failed to import or was not formatted properly
             return 'There was an issue importing your file. Please make sure the file type is CSV and data is formatted properly.'
         
-        #else:
-            #return send_file("output.csv", as_attachment=True)
     else:
-        #tasks = Todo.query.order_by(Todo.date_created).all()
-        #return render_template("download.html",output="output.csv")
-        #return redirect('/')
-        #dataset = pd.read_csv(input_file, sep=",")
-        
-        #return redirect('/')
+        # If a POST request is not made then display the homepage until input is registered.
         return render_template("index.html")
-
-
-@app.route('/campaign_name/', methods=["GET", "POST"])
-def download():
-    if request.method == "POST":
-        campaign_name = str(request.form['campaign_name'])
-        return render_template("index.html")
-    else:
-        pass
-
-
-
-
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)

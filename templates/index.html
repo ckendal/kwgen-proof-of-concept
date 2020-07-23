@@ -6,22 +6,27 @@
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center">KeyWord Generator: proof of concept</h1>
-    <p>
-        Input a CSV published to the web (from Google Sheets). Upon successful import, the download will begin shortly. Otherwise, you will recieve an error message.
-    </p>
-    <!--
-    <p>
-        Input a CSV file either from your local computer, or from a CSV published to the web.
-    </p>
-    -->
+    <h1 style="text-align: center">KeyWord Generator</h1>
     
+    <br>
+    
+    <h3>Instructions:</h3>
+    
+    <p>
+        Input a CSV published to the web (from Google Sheets). Upon successful import, the download will begin shortly.
+    </p>
 
     <!-- Form to input link to CSV published to the web -->
     <div class="form">
         <form action="/" method="POST">
             <input type="text" name="content" id="content">
-            <input type="submit" value="Upload & Process CSV">
+            <input type="submit" value="Generate Keywords">
+
+            <br>
+            <!-- Input Campaign name 
+            <input type="text" name="campaign_name" id="campaign_name">
+            <input type="submit" value="Enter Campaign Name">
+            -->
         </form>
     </div>
 
@@ -36,6 +41,51 @@
     </div>
     -->
 
+    <br>
+
+    <!-- Display table of sample input file -->
+    <div class="table">
+        <h3>Sample Input File:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Campaign Name</th>
+                    <th>Column 1</th>
+                    <th>Column 2</th>
+                    <th>Column 3</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                
+                <tr>
+                    <td>*campaign name goes here*</td>
+                    <td>She</td>
+                    <td>Sells</td>
+                    <td>Seashells</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>By</td>
+                    <td>The</td>
+                    <td>Seashore</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Columns Do Not</td>
+                    <td>Need To Be</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>The Same Length</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
     <!-- Form to upload CSV file from local system (need to resolve encoding issue)
      <div class="form">
         <form action="/" method="POST">
@@ -44,8 +94,5 @@
         </form>
     </div>
     -->
-
-    <br>
-
 </div>
 {% endblock %}
