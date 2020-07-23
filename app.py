@@ -18,7 +18,7 @@ def index():
             campaign_name = str(df.loc[0, "Campaign Name"])
 
             # remove the campaign name column from the dataframe
-            df.drop(columns=["Campaign Name"])
+            df = df.drop(columns=["Campaign Name"])
             
             # count number of remaining columns in the dataframe
             col_num = len(df.columns)
@@ -65,7 +65,7 @@ def index():
                 word =  " ".join(list(final.iloc[i]))
                 em = "[" + word + "]"
                 mbm = word.replace(" "," +")
-                mbm = "+" + mbm
+                mbm = " +" + mbm
                 
                 em_kw.append(em)
                 mbm_kw.append(mbm)
