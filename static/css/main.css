@@ -1,15 +1,18 @@
 body, html {
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .content {
     margin: 0 auto;
-    width: 400px;
+    width: 500px;
+    background-color: lightskyblue;
+    border: 2px solid black;
+    padding: 5px;
 }
 
 table, td, th {
-    border: 1px solid #aaa;
+    border: 2px solid #aaa;
 }
 
 table {
@@ -19,6 +22,12 @@ table {
 
 th {
     height: 30px;
+    background-color: lightgray;
+}
+
+tbody {
+    background-color: whitesmoke;
+
 }
 
 td {
@@ -30,6 +39,10 @@ td {
     margin-top: 20px;
 }
 
+input {
+    font-size: 20px;
+}
+
 #content {
-    width: 70%;
+    width: 55%;
 }
