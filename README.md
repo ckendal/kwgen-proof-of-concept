@@ -23,9 +23,12 @@ However, the location of the 'Campaign Name' column in the input file does not m
 - July 23, 2020
 -- Added support for entry of campaign name via the import file.
 
-- July 26, 2020
+- July 26, 2020 (update 1)
 -- Updated color profile via CSS
 -- Converted the core keyword process into a function from an external file (kwgen.py) [This reduces the number of lines in the app and will allow it to be re-used]
+
+- July 26, 2020 (update 2)
+-- Added support for multiple input sheets via xlsx file
 
 ### Upcoming features
 To Do:
