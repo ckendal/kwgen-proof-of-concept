@@ -1,18 +1,12 @@
-def test_function():
-    print("This works!")
-
 # Function to generate keywords
 """
 Inputs:
 - dataframe
-
 Dependencies
 - from itertools import product
 - import pandas as pd
-
 Output:
 - DataFrame
-
 Notes:
 - This should be in a function so the task can be repeated
 if multiple sheets are input via an excel spreadsheet
@@ -106,3 +100,126 @@ def process_keywords(dataset):
 
     # Return the output dataframe
     return keyword_output
+
+#-- Function to split input file into smaller dataframes --#
+def process_dataset(dataset):
+    """Input a pandas dataframe and split it into separate dataframes of equal size. Then it will process the keywords.
+    Returns a single dataframe of processed keywords"""
+    import pandas as pd
+
+    # Check number of columns in the dataframe
+    col_count = len(list(dataset.columns))
+
+    # List to return output dataframes (if necessary)
+    df_output = []
+
+    if col_count < 11:
+        #pass # do nothing if there are less than 11 columns in the input file (assumes the input is formatted properly)
+        dataset = dataset.rename(columns={dataset.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        return dataset
+
+    elif (col_count > 11) & (col_count <= 22): # Between 12 and 22 columns (corresponding to 2 input sheets)
+        df1 = dataset.iloc[:,0:11].copy() # copy the original dataframe
+        df1 = df1.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df1 = df1.rename(columns={df1.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df1 = process_keywords(df1) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df1) # append the dataframe to the list
+
+        df2 = dataset.iloc[:,11:].copy() # copy the original dataframe
+        df2 = df2.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df2 = df2.rename(columns={df2.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df2 = process_keywords(df2) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df2)
+
+        # Concatenate output dataframes and return
+        output_df = pd.concat([df_output[0], df_output[1]])
+        return output_df
+    
+    elif (col_count > 22) & (col_count <= 33): # Between 23 and 33 columns
+        df1 = dataset.iloc[:,0:11].copy() # copy the original dataframe
+        df1 = df1.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df1 = df1.rename(columns={df1.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df1 = process_keywords(df1) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df1) # append the dataframe to the list
+
+        df2 = dataset.iloc[:,11:22].copy() # copy the original dataframe
+        df2 = df2.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df2 = df2.rename(columns={df2.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df2 = process_keywords(df2) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df2)
+
+        df3 = dataset.iloc[:,22:].copy() # copy the original dataframe
+        df3 = df3.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df3 = df3.rename(columns={df3.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df3 = process_keywords(df3) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df3)
+
+        # Concatenate output dataframes and return
+        output_df = pd.concat([df_output[0], df_output[1], df_output[2]])
+        return output_df
+
+    elif (col_count > 33) & (col_count <= 44): # Between 33 and 44 columns
+        df1 = dataset.iloc[:,0:11].copy() # copy the original dataframe
+        df1 = df1.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df1 = df1.rename(columns={df1.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df1 = process_keywords(df1) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df1) # append the dataframe to the list
+
+        df2 = dataset.iloc[:,11:22].copy() # copy the original dataframe
+        df2 = df2.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df2 = df2.rename(columns={df2.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df2 = process_keywords(df2) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df2)
+
+        df3 = dataset.iloc[:,22:33].copy() # copy the original dataframe
+        df3 = df3.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df3 = df3.rename(columns={df3.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df3 = process_keywords(df3) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df3)
+
+        df4 = dataset.iloc[:,33:].copy() # copy the original dataframe
+        df4 = df4.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df4 = df4.rename(columns={df4.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df4 = process_keywords(df4) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df4)
+
+        # Concatenate output dataframes and return
+        output_df = pd.concat([df_output[0], df_output[1], df_output[2], df_output[3]])
+        return output_df
+
+    elif (col_count > 44) & (col_count <= 55): # Between 44 and 55 columns
+        df1 = dataset.iloc[:,0:11].copy() # copy the original dataframe
+        df1 = df1.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df1 = df1.rename(columns={df1.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df1 = process_keywords(df1) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df1) # append the dataframe to the list
+
+        df2 = dataset.iloc[:,11:22].copy() # copy the original dataframe
+        df2 = df2.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df2 = df2.rename(columns={df2.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df2 = process_keywords(df2) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df2)
+
+        df3 = dataset.iloc[:,22:33].copy() # copy the original dataframe
+        df3 = df3.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df3 = df3.rename(columns={df3.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df3 = process_keywords(df3) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df3)
+
+        df4 = dataset.iloc[:,33:44].copy() # copy the original dataframe
+        df4 = df4.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df4 = df4.rename(columns={df4.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df4 = process_keywords(df4) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df4)
+
+        df5 = dataset.iloc[:,44:].copy() # copy the original dataframe
+        df5 = df5.dropna(how='all',axis='columns') # drop any columns that are completely empty
+        df5 = df5.rename(columns={df5.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        df5 = process_keywords(df5) # Generate a dataframe of keywords from this dataframe
+        df_output.append(df5)
+
+        # Concatenate output dataframes and return
+        output_df = pd.concat([df_output[0], df_output[1], df_output[2], df_output[3], df_output[4]])
+        return output_df
+
+    
