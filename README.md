@@ -27,7 +27,7 @@ However, the location of the 'Campaign Name' column in the input file does not m
 -- Updated color profile via CSS
 -- Converted the core keyword process into a function from an external file (kwgen.py) [This reduces the number of lines in the app and will allow it to be re-used]
 
-- July 27, 2020 (update 2)
+- July 27, 2020
 -- Added support for multiple campaign inputs in a single input sheet (provided a new 'input sheet' begins every 11 columns)
 
 ### Upcoming features
