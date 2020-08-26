@@ -30,6 +30,10 @@ However, the location of the 'Campaign Name' column in the input file does not m
 - July 27, 2020
 -- Added support for multiple campaign inputs in a single input sheet (provided a new 'input sheet' begins every 11 columns)
 
+- August 26, 2020
+-- Fixed process_dataset() function in kwgen.py to correctly support input of < 11 columns
+-- Updated sample text on index.html to reflect Bayern's historic 2019-2020 season!
+
 ### Upcoming features
 To Do:
 - Add support for a single input column
@@ -38,6 +42,7 @@ To Do:
 - write formal documentation
 - more code comments
 - Add support for multiple sheet input (via excel file)
+- Memory management for large files
 
 Wishlist:
 - Add feature to email results

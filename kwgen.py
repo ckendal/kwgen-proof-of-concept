@@ -113,9 +113,10 @@ def process_dataset(dataset):
     # List to return output dataframes (if necessary)
     df_output = []
 
-    if col_count < 11:
+    if col_count <= 11:
         #pass # do nothing if there are less than 11 columns in the input file (assumes the input is formatted properly)
         dataset = dataset.rename(columns={dataset.columns[0]:"Campaign Name"}) # Rename the first column to 'Campaign Name'
+        dataset = process_keywords(dataset)
         return dataset
 
     elif (col_count > 11) & (col_count <= 22): # Between 12 and 22 columns (corresponding to 2 input sheets)
